@@ -3,6 +3,7 @@ from typing import Annotated
 from fastapi import Depends
 from fastapi import Form, FastAPI
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 
 from database.async_db import DataBase as Db
 from database.async_db import db as db_ins
@@ -10,10 +11,16 @@ from database.async_db import db as db_ins
 
 app = FastAPI()
 
+class office(BaseModel):
+    id: int
+    name: str
+    photo: str
+    description: str
 
-@app.post("/recom",
+
+@app.et("/recom_office",
              responses={
-                 200: {"model": Message, "description": "Successful Response"},
+                 200: {"model": office, "description": "Successful Response"},
              })
 async def add_post_post(autor: Annotated[str, Form()],
                         topic: Annotated[str, Form()],

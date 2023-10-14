@@ -7,17 +7,17 @@ conn = psycopg2.connect('postgresql://iremux:pencil@65.109.233.182:5432/branches
 cursor = conn.cursor()
 
 
-# CREATE TABLE public.services (
+# CREATE TABLE services (
 # 	id serial PRIMARY KEY,
 # 	name varchar NOT NULL
 # );
 
-# CREATE TABLE public.services_of_atm (
+# CREATE TABLE services_of_atm (
 # 	id serial PRIMARY KEY,
 # 	serviceCapability varchar(50),
 # 	serviceActivity varchar(50),
 # 	service_id int not null,
-# 	atm_id int bot null,
+# 	atm_id int not null,
 # 	FOREIGN KEY (atm_id) REFERENCES atms(id),
 # 	FOREIGN KEY (service_id) REFERENCES services(id)
 # );
@@ -29,6 +29,7 @@ cursor = conn.cursor()
 # 	longitude float8,
 # 	allDay bool
 # );
+
 services = {
         "wheelchair": 1,
         "blind": 2,

@@ -13,10 +13,10 @@ cursor = conn.cursor()
 #     id serial PRIMARY KEY,
 #     salePointName VARCHAR(255),
 #     address VARCHAR(255),
-#     status VARCHAR(50),
-#     rko VARCHAR(50),
-#     officeType VARCHAR(50),
-#     salePointFormat VARCHAR(50),
+#     status VARCHAR(255),
+#     rko VARCHAR(255),
+#     officeType VARCHAR(255),
+#     salePointFormat VARCHAR(255),
 #     suoAvailability CHAR(1),
 #     hasRamp CHAR(1),
 #     latitude FLOAT,
@@ -25,7 +25,7 @@ cursor = conn.cursor()
 #     distance FLOAT,
 #     kep BOOLEAN,
 #     myBranch BOOLEAN
-# )
+# );
 # """)
 #
 # cursor.execute("""

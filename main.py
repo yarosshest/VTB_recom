@@ -1,16 +1,12 @@
-# This is a sample Python script.
+import numpy as np
+from keras.utils import to_categorical
+from sklearn.preprocessing import LabelEncoder
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# define example
+data = ['dog', 'dog', 'cat', 'cat', 'cat', 'dog', 'dog', 'cat', 'cat']
 
+s = set(['dog', 'dog', 'cat', 'cat', 'cat', 'dog', 'dog', 'cat', 'cat'])
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+label_encoder = LabelEncoder()
+label_encoder.fit(np.array(list(s)))
+print(to_categorical(label_encoder.transform(data))[0])
