@@ -3,7 +3,6 @@ from typing import Annotated
 from fastapi import Depends
 from fastapi import Form, FastAPI
 from fastapi.responses import JSONResponse
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from database.async_db import DataBase as Db
 from database.async_db import db as db_ins
