@@ -11,8 +11,9 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.orm import selectinload, joinedload, contains_eager
+from haversine import haversine, Unit
 
-from database.Db_objects import Branch,Function, Base
+from database.Db_objects import Branch, Function, Base
 
 meta = MetaData()
 
@@ -42,18 +43,6 @@ class DataBase:
             await async_session.begin()
             return async_session
 
-    @staticmethod
-    async def init_db() -> None:
-        engine = create_async_engine(
-            BDCONNECTION,
-            echo=False,
-            poolclass=NullPool,
-        )
-        async with engine.begin() as conn:
-            await conn.run_sync(Base.metadata.create_all)
-
-        await engine.dispose()
-
     async def get_brances(self) -> List[Branch]:
         session = await self.get_session()
         q = select(Branch).join(Function, Function.branch_id == Branch.id).options(contains_eager(Branch.functions))
@@ -62,12 +51,24 @@ class DataBase:
         for i in posts:
             res.append(i)
         session.expunge_all()
-        await session.commit()
         return res
 
+    async def get_near_one(self, lat: float, lon: float) -> list[float]:
+        session = await self.get_session()
+        q = select(Branch).join(Function, Function.branch_id == Branch.id).options(contains_eager(Branch.functions))
+        posts = (await session.execute(q)).scalars().unique().fetchall()
+        res = []
 
-# db = DataBase()
+        for i in posts:
+            h = haversine((i.latitude, i.longitude), (lat, lon))
+            lot_lon = [h, i.latitude, i.longitude]
+
+            res.append(lot_lon)
+        res.sort(key=lambda x: x[0])
+        return res[0][1:]
+
+
+db = DataBase()
 
 if __name__ == "__main__":
     tracemalloc.start()
-    asyncio.run(DataBase.init_db())

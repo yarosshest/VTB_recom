@@ -1,0 +1,7 @@
+services:
+  app:
+    build:
+      dockerfile: "./Dockerfile"
+    ports:
+      - "60103:8031"
+    restart: always
