@@ -11,6 +11,15 @@ cursor = conn.cursor()
 # 	id serial PRIMARY KEY,
 # 	name varchar NOT NULL
 # );
+#
+# INSERT INTO services (name) VALUES ('wheelchair');
+# INSERT INTO services (name) VALUES ('blind');
+# INSERT INTO services (name) VALUES ('nfcForBankCards');
+# INSERT INTO services (name) VALUES ('qrRead');
+# INSERT INTO services (name) VALUES ('supportsUsd');
+# INSERT INTO services (name) VALUES ('supportsChargeRub');
+# INSERT INTO services (name) VALUES ('supportsEur');
+# INSERT INTO services (name) VALUES ('supportsRub');
 
 # CREATE TABLE services_of_atm (
 # 	id serial PRIMARY KEY,
@@ -29,6 +38,7 @@ cursor = conn.cursor()
 # 	longitude float8,
 # 	allDay bool
 # );
+
 
 services = {
         "wheelchair": 1,
