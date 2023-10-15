@@ -3,7 +3,6 @@ from typing import Annotated
 import uvicorn
 from fastapi import Depends
 from fastapi import Form, FastAPI
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 from database.async_db import DataBase as Db
